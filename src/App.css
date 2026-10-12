@@ -6,7 +6,7 @@
   color: #274713;
   font-size: large;
 }
-.List{
+#List{
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -24,14 +24,15 @@
   background-color: #be00ff;
   color: #08060d;
   width: 100%;
+  transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease;
+
+
   &:hover{
     background-color: #bc9b14;
-    cursor: grab; /* When hovering, it will change the cursor to a grab.*/
+    cursor: pointer; /* When hovering, it will change the cursor to a grab.*/
+    transition-duration: 1s;
   }
 
 }
-.task_card.draggable{
-  opacity: 0.4;
-  border: 2px dashed #007bff;
-}
+
 
