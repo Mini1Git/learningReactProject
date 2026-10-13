@@ -1,39 +1,51 @@
 // so when starting a new React Proj, always make sure to use Eslint (recommended).
 import './App.css'
-import {useState} from "react";
+import {Display} from "./displayTasks.tsx";
+
 import type {Task} from "./TaskBlueprint.ts";
-//need to learn how to use states.
+import {useState} from "react";
 
 
 
 export const App = () => {
 
-    const tasks = [
+    //state
+    const [taskList, setTaskList] = useState([
         { id: 1, title: 'Study React' },
         { id: 2, title: 'Finish homework' },
-        { id: 3, title: 'Practice coding' },
-    ]; // example data
+        { id: 3, title: 'Practice coding' }]);
 
-    const [selectedTask, setTask] = useState<Task | null> // what types can be used for this state.
-    (null); // default value
+    const [inputUserValue, setUserInput] = useState("");
+    function submitHandler(e: React.SubmitEvent<HTMLFormElement>){
+        e.preventDefault();
+        if (inputUserValue.trim() ===""){return null} //
+        const newTask:Task = {id: taskList.length + 1, title: inputUserValue};
+        setTaskList(taskList => [...taskList, newTask]);
 
+
+    }
+
+
+//The next part is to add a task.
   return (
     <>
         <h1>Tasks</h1>
-        <form>
-          <input id ="add_task"  type = "text"/>
-          <input id = "submit_button" type ="submit" value="Submitte"/>
+        <form id = "addTaskForm" onSubmit={submitHandler}>
+          <input id ="add_task"  type = "text" onChange={(event) => setUserInput(event.target.value)} />
+          <input id = "submit_button" type ="submit" value="Add a Task" onClick={() => {
+            console.log(taskList);
+          }}/>
         </form>
-        <ul id="List">
-            {tasks.map(task => <li key={task.id} className={"task_card"} onClick={() => {
-                setTask({id:task.id, title:task.title});
+        <Display tasksToDisplay={taskList}/>
+        <div id = "doneButton">
+            <button>Done</button>
+        </div>
 
-            }}> {task.title}</li>)}
-        </ul>
-        <p>Selected Task: {selectedTask?.title ?? "No Task selected!"}</p>
+
     </>
   )
 }
+
 
 
 
