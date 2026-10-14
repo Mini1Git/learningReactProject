@@ -36,12 +36,18 @@
   }
 
 }
-.task_card_selected{
+.task_card.selected{
   background-color: white;
   width: 100%;
-  padding:10px;
+
   user-select: none;
   cursor: pointer;
+}
+.task_card.completed{
+  content: "DONE";
+  pointer-events: none;
+  background-color: red;
+
 }
 .doneButton{
 display: inline-flex;
@@ -49,6 +55,7 @@ justify-items: left;
 
 
 }
+
 button{
   color: #08060d;
   width: 50%;
